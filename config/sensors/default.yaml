@@ -1,0 +1,44 @@
+sensors:
+  laser:
+    frame_id: base_laser_link
+    topic: /scan
+    fov_degrees: 270
+    range_min: 0.05
+    range_max: 10.0
+    num_rays: 360
+    noise_std_dev: 0.01
+    mount_offset: [0.22, 0.0, 0.0]
+    rate_hz: 10
+    profile: laser
+
+  depth:
+    frame_id: camera_depth_frame
+    topic: /camera/scan
+    fov_degrees: 45
+    vfov_degrees: 30
+    range_min: 0.0
+    range_max: 2.3
+    num_rays: 120
+    noise_std_dev: 0.005
+    mount_offset: [0.3264, 0.0, 0.0]
+    mount_pose:
+      xyz: [0.3264, 0.0, 1.0819]
+      quat_xyzw: [0.0, 0.38683, 0.0, 0.92214]
+    rate_hz: 10
+    profile: depth
+
+  rear_depth:
+    frame_id: camera_rear_depth_frame
+    topic: /camera_rear/scan
+    fov_degrees: 60
+    vfov_degrees: 45
+    range_min: 0.0
+    range_max: 2.0
+    num_rays: 120
+    noise_std_dev: 0.005
+    mount_offset: [-0.35, 0.0, 3.14159]
+    mount_pose:
+      xyz: [-0.35, 0.0, 1.128844]
+      quat_xyzw: [0.542170, 0.005427, -0.840214, 0.007916]
+    rate_hz: 10
+    profile: depth

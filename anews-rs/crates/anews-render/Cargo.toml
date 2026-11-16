@@ -1,0 +1,15 @@
+[package]
+name = "anews-render"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anews-core = { path = "../anews-core" }
+wgpu = "28"
+pollster = "0.4"
+bytemuck = { version = "1", features = ["derive"] }
+glam = { version = "0.30", features = ["bytemuck"] }
+ab_glyph = "0.2"
+gltf = { version = "1", default-features = false, features = ["utils", "names"] }
+serde_json = "1"
+chrono = { version = "0.4", default-features = false, features = ["clock"] }

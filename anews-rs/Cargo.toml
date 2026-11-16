@@ -1,0 +1,11 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/anews-core",
+    "crates/anews-engine",
+    "crates/anews-wasm",
+    "crates/anews-raycast",
+    "crates/anews-render",
+    "crates/anews-link",
+    "crates/anews",
+]

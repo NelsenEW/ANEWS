@@ -1,0 +1,29 @@
+scenario:
+  name: l2_maze
+  description: >
+    L2 Constrained: Robot navigates a simple maze with 2 internal walls
+    creating 4 forced direction changes. Tests global planner path finding
+    through constrained passages and the controller's ability to execute
+    multi-turn plans. Much harder than l2_u_turn which has only one detour.
+  seed: 21
+  metadata:
+    category: benchmark
+    tier: l2_constrained
+    difficulty: hard
+    tags: [benchmark, l2, maze, path-planning, multi-turn]
+
+  localization_map: maps/maze.yaml
+
+  robot:
+    spawn_pose: [-3.5, -2.5, 0.0]
+    sensor_profile: default
+
+  goal:
+    x: 3.5
+    y: 2.5
+    tolerance: 0.3
+    timeout: 90.0
+
+  furniture: []
+  humans: []
+  events: []

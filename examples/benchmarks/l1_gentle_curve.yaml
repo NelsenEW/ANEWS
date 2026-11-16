@@ -1,0 +1,27 @@
+scenario:
+  name: l1_gentle_curve
+  description: >
+    L1 Primitive: Robot navigates a 90-degree curve to a goal offset both in
+    x and y. Tests combined linear+angular motion and path smoothness.
+  seed: 3
+  metadata:
+    category: benchmark
+    tier: l1_primitive
+    difficulty: easy
+    tags: [benchmark, l1, curve, combined-motion]
+
+  localization_map: maps/restaurant.yaml
+
+  robot:
+    spawn_pose: [0.0, 0.0, 0.0]
+    sensor_profile: default
+
+  goal:
+    x: 4.0
+    y: 2.0
+    tolerance: 0.3
+    timeout: 30.0
+
+  furniture: []
+  humans: []
+  events: []

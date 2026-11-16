@@ -1,0 +1,234 @@
+scenario:
+  name: l3_restaurant_with_humans
+  description: Synthetic rectangular restaurant with six evenly spaced tables; not
+    a real venue.
+  seed: 1
+  metadata:
+    category: benchmark
+    tier: l3_full
+    difficulty: hard
+    tags:
+    - benchmark
+    - l3
+    - restaurant
+    - delivery
+    - humans
+    - dynamic
+  localization_map: maps/restaurant.yaml
+  robot:
+    spawn_pose:
+    - 0.0
+    - 0.0
+    - 0.0
+    sensor_profile: default
+  goal:
+    x: 5.0
+    y: 0.5
+    tolerance: 0.35
+    timeout: 120.0
+  furniture:
+  - type: table4
+    pose:
+    - -6.0
+    - -4.0
+    - 0.0
+    label: T1
+    width: 1.5
+    height: 0.8
+  - type: chair
+    pose:
+    - -7.3
+    - -4.0
+    - 0.0
+    label: C1_-1
+    width: 0.5
+    height: 0.5
+  - type: chair
+    pose:
+    - -4.7
+    - -4.0
+    - 0.0
+    label: C1_1
+    width: 0.5
+    height: 0.5
+  - type: table4
+    pose:
+    - 0.0
+    - -4.0
+    - 0.0
+    label: T2
+    width: 1.5
+    height: 0.8
+  - type: chair
+    pose:
+    - -1.3
+    - -4.0
+    - 0.0
+    label: C2_-1
+    width: 0.5
+    height: 0.5
+  - type: chair
+    pose:
+    - 1.3
+    - -4.0
+    - 0.0
+    label: C2_1
+    width: 0.5
+    height: 0.5
+  - type: table4
+    pose:
+    - 6.0
+    - -4.0
+    - 0.0
+    label: T3
+    width: 1.5
+    height: 0.8
+  - type: chair
+    pose:
+    - 4.7
+    - -4.0
+    - 0.0
+    label: C3_-1
+    width: 0.5
+    height: 0.5
+  - type: chair
+    pose:
+    - 7.3
+    - -4.0
+    - 0.0
+    label: C3_1
+    width: 0.5
+    height: 0.5
+  - type: table4
+    pose:
+    - -6.0
+    - 4.0
+    - 0.0
+    label: T4
+    width: 1.5
+    height: 0.8
+  - type: chair
+    pose:
+    - -7.3
+    - 4.0
+    - 0.0
+    label: C4_-1
+    width: 0.5
+    height: 0.5
+  - type: chair
+    pose:
+    - -4.7
+    - 4.0
+    - 0.0
+    label: C4_1
+    width: 0.5
+    height: 0.5
+  - type: table4
+    pose:
+    - 0.0
+    - 4.0
+    - 0.0
+    label: T5
+    width: 1.5
+    height: 0.8
+  - type: chair
+    pose:
+    - -1.3
+    - 4.0
+    - 0.0
+    label: C5_-1
+    width: 0.5
+    height: 0.5
+  - type: chair
+    pose:
+    - 1.3
+    - 4.0
+    - 0.0
+    label: C5_1
+    width: 0.5
+    height: 0.5
+  - type: table4
+    pose:
+    - 6.0
+    - 4.0
+    - 0.0
+    label: T6
+    width: 1.5
+    height: 0.8
+  - type: chair
+    pose:
+    - 4.7
+    - 4.0
+    - 0.0
+    label: C6_-1
+    width: 0.5
+    height: 0.5
+  - type: chair
+    pose:
+    - 7.3
+    - 4.0
+    - 0.0
+    label: C6_1
+    width: 0.5
+    height: 0.5
+  named_poses:
+  - name: production
+    kind: production
+    x: 0.0
+    y: 0.0
+    theta: 0.0
+  - name: charger
+    kind: charger
+    x: -10.0
+    y: 0.0
+    theta: 0.0
+  - name: recycle
+    kind: recycle
+    x: 10.0
+    y: 0.0
+    theta: 0.0
+  - name: '1'
+    kind: delivery
+    x: -6.0
+    y: -2.5
+    theta: -1.5708
+  - name: '2'
+    kind: delivery
+    x: 0.0
+    y: -2.5
+    theta: -1.5708
+  - name: '3'
+    kind: delivery
+    x: 6.0
+    y: -2.5
+    theta: -1.5708
+  - name: '4'
+    kind: delivery
+    x: -6.0
+    y: 2.5
+    theta: 1.5708
+  - name: '5'
+    kind: delivery
+    x: 0.0
+    y: 2.5
+    theta: 1.5708
+  - name: '6'
+    kind: delivery
+    x: 6.0
+    y: 2.5
+    theta: 1.5708
+  furniture_jitter:
+    enabled: false
+  humans:
+  - name: pedestrian
+    speed: 0.4
+    radius: 0.25
+    path:
+    - - -8.0
+      - 1.5
+    - - 8.0
+      - 1.5
+    loop: true
+    pause_at_waypoints: 1.0
+    start_delay: 5.0
+  events: []

@@ -1,0 +1,16 @@
+
+footprint:
+  - [-0.299, -0.180]
+  - [-0.299,  0.180]
+  - [ 0.299,  0.180]
+  - [ 0.299, -0.180]
+
+footprint_padding: 0.05
+
+collision_radius: 0.35
+
+max_linear_vel: 0.6
+max_angular_vel: 0.8
+
+max_linear_accel: 0.22
+max_angular_accel: 0.6

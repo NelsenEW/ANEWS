@@ -1,0 +1,21 @@
+[package]
+name = "anews"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anews-core = { path = "../anews-core" }
+anews-engine = { path = "../anews-engine" }
+anews-raycast = { path = "../anews-raycast" }
+anews-render = { path = "../anews-render" }
+anews-link = { path = "../anews-link" }
+tokio = { version = "1", features = ["full"] }
+tokio-tungstenite = "0.24"
+clap = { version = "4", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_yaml = "0.9"
+futures-util = "0.3"
+axum = "0.8"
+tower-http = { version = "0.6", features = ["cors", "fs"] }
+base64 = "0.22"

@@ -1,0 +1,32 @@
+scenario:
+  name: red_adv_1_diagonal_rude_human
+  description: >
+    Red-designed adversarial scenario 1 (L2+). Diagonal 5m goal with
+    a rude (non-avoiding) human crossing the robot's path at x=3.
+    Tests human avoidance + replanning under dynamic obstacle.
+  seed: 42
+  metadata:
+    category: benchmark
+    tier: l2_adversarial
+    difficulty: hard
+    tags: [benchmark, red, adversarial, dynamic, human]
+
+  localization_map: maps/restaurant.yaml
+
+  robot:
+    spawn_pose: [0.0, 0.0, 0.0]
+    sensor_profile: default
+
+  goal:
+    x: 4.5
+    y: 2.0
+    tolerance: 0.3
+    timeout: 60.0
+
+  humans:
+    - name: rude_waiter
+      path: [[3.0, -1.5], [3.0, 1.5]]
+      speed: 0.7
+      radius: 0.25
+      loop: true
+      avoidance: false

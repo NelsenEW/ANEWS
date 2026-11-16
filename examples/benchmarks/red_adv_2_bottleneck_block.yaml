@@ -1,0 +1,43 @@
+scenario:
+  name: red_adv_2_bottleneck_block
+  description: >
+    Red-designed adversarial 2 (harder). A corridor formed by two tables
+    around x=2.5 (gap ~0.6m), a third bottleneck table near the goal,
+    and a rude human pacing inside the corridor.
+  seed: 43
+  metadata:
+    category: benchmark
+    tier: l2_adversarial
+    difficulty: very_hard
+    tags: [benchmark, red, adversarial, corridor, rude-human]
+
+  localization_map: maps/restaurant.yaml
+
+  robot:
+    spawn_pose: [0.0, 0.0, 0.0]
+    sensor_profile: default
+
+  goal:
+    x: 5.0
+    y: 0.0
+    tolerance: 0.3
+    timeout: 75.0
+
+  furniture:
+    - type: table4
+      pose: [2.5, 0.7, 0.0]
+      label: "bottleneck-N"
+    - type: table4
+      pose: [2.5, -0.7, 0.0]
+      label: "bottleneck-S"
+    - type: table4
+      pose: [4.0, 0.6, 0.0]
+      label: "near-goal"
+
+  humans:
+    - name: corridor_walker
+      path: [[2.5, -1.2], [2.5, 1.2]]
+      speed: 0.4
+      radius: 0.3
+      loop: true
+      avoidance: false

@@ -1,0 +1,16 @@
+services:
+  nav2:
+    build: ./nav2
+    network_mode: host
+    volumes:
+      - ../venues/demo_cafe:/venue:ro
+  anews:
+    build:
+      context: ..
+      dockerfile: demo/anews.Dockerfile
+    network_mode: host
+    depends_on: [nav2]
+    user: "${UID:-1000}:${GID:-1000}"
+    volumes:
+      - ./out:/anews/demo/out
+    command: [sim, batch, dinner_rush.yaml, --out, out]

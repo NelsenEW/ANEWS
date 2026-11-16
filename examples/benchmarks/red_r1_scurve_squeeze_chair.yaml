@@ -1,0 +1,69 @@
+scenario:
+  name: red_r1_scurve_squeeze_chair
+  description: >
+    Red R1 L2 adversarial v1 — S-curve squeeze. Robot starts at (0,0) and
+    must weave through TWO offset gap-pairs (an S-pattern) to reach a goal
+    south-east at (5.5, -1.5), where a chair sits ~0.45m south-west of the
+    goal, forcing a tight final approach.
+
+    Why this breaks current Nav2 (ax_min=-0.25, threshold_to_consider=0.8,
+    inflation 0.35/scale 4.0):
+      • S-curve forces repeated decel → accel → decel. With ax_min=-0.25
+        MPPI can't brake hard enough entering the 2nd gap, so it either
+        overshoots the gap centre line (clipping inflation) or oscillates.
+      • The 2nd gap (at x=3.6) is offset 1.0m south of the 1st, so MPPI
+        must actually pitch right and commit — a conservative deceleration
+        profile tends to produce wide arcs that scrape the south blocker.
+      • threshold_to_consider=0.8 makes the controller start its
+        approach-slowdown 0.8m from the goal, but the chair inside the
+        0.8m sphere forces mid-slowdown evasive yaw → overshoot past the
+        0.3m goal tolerance is highly likely.
+
+    A tuned blue agent can pass by: tightening ax_min (e.g. -0.18),
+    shrinking threshold_to_consider (e.g. 0.4), or reducing inflation_radius
+    (e.g. 0.28) to widen the usable gap.
+  seed: 91
+  metadata:
+    category: benchmark
+    tier: l2_adversarial
+    difficulty: hard
+    tags: [benchmark, red, adversarial, s-curve, chair-squeeze, overshoot]
+
+  localization_map: maps/restaurant.yaml
+
+  robot:
+    spawn_pose: [0.0, 0.0, 0.0]
+    sensor_profile: default
+
+  goal:
+    x: 5.5
+    y: -1.5
+    tolerance: 0.3
+    timeout: 35.0
+
+  furniture:
+    - type: table4
+      pose: [2.2, 1.1, 0.0]
+      label: "gap1-N"
+      width: 1.2
+      height: 0.8
+    - type: table4
+      pose: [2.2, -0.65, 0.0]
+      label: "gap1-S"
+      width: 1.2
+      height: 0.8
+
+    - type: tableLarge
+      pose: [3.8, 0.0, 0.0]
+      label: "gap2-N-blocker"
+      width: 1.4
+      height: 1.1
+
+    - type: chair
+      pose: [5.05, -1.15, 0.0]
+      label: "goal-chair"
+      width: 0.55
+      height: 0.55
+
+  humans: []
+  events: []

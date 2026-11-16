@@ -1,0 +1,34 @@
+scenario:
+  name: l2_u_turn
+  description: >
+    L2 Constrained: Robot must navigate around a wide table blocking the
+    direct path. Requires a U-shaped detour. Tests global planner path
+    finding and the robot's ability to follow a non-trivial path.
+  seed: 12
+  metadata:
+    category: benchmark
+    tier: l2_constrained
+    difficulty: medium
+    tags: [benchmark, l2, u-turn, detour, path-planning]
+
+  localization_map: maps/restaurant.yaml
+
+  robot:
+    spawn_pose: [0.0, 0.0, 0.0]
+    sensor_profile: default
+
+  goal:
+    x: 5.0
+    y: 0.0
+    tolerance: 0.3
+    timeout: 60.0
+
+  furniture:
+    - type: tableLarge
+      pose: [2.5, 0.0, 0.0]
+      label: "T-block"
+      width: 2.6
+      height: 1.9
+
+  humans: []
+  events: []

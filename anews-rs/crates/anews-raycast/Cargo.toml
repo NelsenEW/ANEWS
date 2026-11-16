@@ -1,0 +1,20 @@
+[package]
+name = "anews-raycast"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+default = ["gpu"]
+gpu = ["dep:wgpu", "dep:pollster", "dep:bytemuck"]
+
+[dependencies]
+anews-core = { path = "../anews-core" }
+parry3d = "0.31"
+rayon = "1"
+wgpu = { version = "28", optional = true }
+pollster = { version = "0.4", optional = true }
+bytemuck = { version = "1", features = ["derive"], optional = true }
+
+[[example]]
+name = "sense_bench"
+required-features = ["gpu"]

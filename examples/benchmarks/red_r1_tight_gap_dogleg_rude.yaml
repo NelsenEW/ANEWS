@@ -1,0 +1,61 @@
+scenario:
+  name: red_r1_tight_gap_dogleg_rude
+  description: >
+    Red R1 L2 adversarial v3. Robot must squeeze a 0.45m gap AT the dogleg
+    corner — not after it. A rude non-avoiding human paces the SAME 0.45m
+    gap at 0.35 m/s, essentially camping in the choke point. Because the
+    human's path overlaps the only through-corridor, Nav2 has two bad
+    choices: (a) wait behind the human indefinitely (-> hard_fail_timeout),
+    or (b) scrape past inside inflation_radius (-> near_miss quality flag).
+    Conservative ax_min=-0.25 and threshold_to_consider=0.8 make both
+    failure modes likelier.
+  seed: 78
+  metadata:
+    category: benchmark
+    tier: l2_adversarial
+    difficulty: hard
+    tags: [benchmark, red, adversarial, choke-point, rude-human, timeout]
+
+  localization_map: maps/restaurant.yaml
+
+  robot:
+    spawn_pose: [0.0, 0.0, 0.0]
+    sensor_profile: default
+
+  goal:
+    x: 4.8
+    y: 2.2
+    tolerance: 0.3
+    timeout: 45.0
+
+  furniture:
+    - type: table4
+      pose: [2.4, 0.625, 0.0]
+      label: "choke-N"
+      width: 0.8
+      height: 0.8
+    - type: table4
+      pose: [2.4, -0.625, 0.0]
+      label: "choke-S"
+      width: 0.8
+      height: 0.8
+    - type: chair
+      pose: [4.1, 1.3, 0.0]
+      label: "corner-squeeze"
+      width: 0.513
+      height: 0.579
+    - type: tableLarge
+      pose: [3.0, -2.4, 0.0]
+      label: "south-blocker"
+      width: 2.2
+      height: 1.4
+
+  humans:
+    - name: choke_camper
+      path: [[2.15, 0.0], [2.65, 0.0]]
+      speed: 0.35
+      radius: 0.3
+      loop: true
+      avoidance: false
+
+  events: []

@@ -1,0 +1,48 @@
+benchmark:
+  name: nav2_benchmark
+  description: >
+    Nav2 tuning benchmark — 3 progressive tiers.
+    L1 (primitives) isolates controller behavior.
+    L2 (constrained) tests obstacle avoidance and costmap tuning.
+    L3 (full) validates system-level integration in restaurant layout.
+    All scenarios use the restaurant map unless specified otherwise.
+
+  tiers:
+    l1_primitive:
+      - scenario: examples/benchmarks/l1_straight.yaml
+        goal: [5.0, 0.0]
+        timeout: 30.0
+      - scenario: examples/benchmarks/l1_point_turn.yaml
+        goal: [0.0, 0.0]
+        timeout: 30.0
+      - scenario: examples/benchmarks/l1_gentle_curve.yaml
+        goal: [4.0, 2.0]
+        timeout: 60.0
+      - scenario: examples/benchmarks/l1_empty.yaml
+        goal: [3.0, 3.0]
+        timeout: 60.0
+
+    l2_constrained:
+      - scenario: examples/benchmarks/l2_narrow_passage.yaml
+        goal: [5.0, 0.0]
+        timeout: 60.0
+      - scenario: examples/benchmarks/l2_obstacle_slalom.yaml
+        goal: [5.5, 0.0]
+        timeout: 60.0
+      - scenario: examples/benchmarks/l2_u_turn.yaml
+        goal: [5.0, 0.0]
+        timeout: 90.0
+      - scenario: examples/benchmarks/l2_corridor.yaml
+        goal: [4.5, 0.0]
+        timeout: 45.0
+      - scenario: examples/benchmarks/l2_maze.yaml
+        goal: [3.5, 2.5]
+        timeout: 90.0
+
+    l3_full:
+      - scenario: examples/benchmarks/l3_restaurant_delivery.yaml
+        goal: [5.0, 0.5]
+        timeout: 90.0
+      - scenario: examples/benchmarks/l3_restaurant_with_humans.yaml
+        goal: [5.0, 0.5]
+        timeout: 120.0

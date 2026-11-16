@@ -1,0 +1,26 @@
+benchmark:
+  name: baseline
+  description: >
+    Baseline Nav2 benchmark — tests primitive behaviors (straight line,
+    point turn), constrained navigation (narrow passage), and full
+    scenarios (failure discovery with humans and furniture traps).
+    Run after any Nav2 parameter change to check for regressions.
+
+  tiers:
+    primitive:
+      - scenario: examples/straight_line.yaml
+        goal: [6.0, -5.0]
+        timeout: 30.0
+      - scenario: examples/point_turn.yaml
+        goal: [1.5, -5.0]
+        timeout: 30.0
+
+    constrained:
+      - scenario: examples/narrow_passage.yaml
+        goal: [6.0, -5.0]
+        timeout: 45.0
+
+    full:
+      - scenario: examples/failure_discovery.yaml
+        goal: [6.0, -8.0]
+        timeout: 60.0

@@ -1,0 +1,40 @@
+scenario:
+  name: l2_narrow_passage
+  description: >
+    L2 Constrained: Robot navigates through a 0.55m gap between two tables.
+    Tests inflation radius tuning and precision obstacle avoidance.
+    If inflation_radius is too large, the planner sees no path. If too
+    small, the robot clips obstacles.
+  seed: 10
+  metadata:
+    category: benchmark
+    tier: l2_constrained
+    difficulty: medium
+    tags: [benchmark, l2, narrow-gap, obstacle-avoidance]
+
+  localization_map: maps/restaurant.yaml
+
+  robot:
+    spawn_pose: [0.0, 0.0, 0.0]
+    sensor_profile: default
+
+  goal:
+    x: 5.0
+    y: 0.0
+    tolerance: 0.3
+    timeout: 45.0
+
+  furniture:
+    - type: table4
+      pose: [2.5, 0.8, 0.0]
+      label: "T-north"
+      width: 1.2
+      height: 0.8
+    - type: table4
+      pose: [2.5, -0.8, 0.0]
+      label: "T-south"
+      width: 1.2
+      height: 0.8
+
+  humans: []
+  events: []

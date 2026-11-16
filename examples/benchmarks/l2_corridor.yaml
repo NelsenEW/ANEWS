@@ -1,0 +1,30 @@
+scenario:
+  name: l2_corridor
+  description: >
+    L2 Constrained: Robot drives 8m through a 1.5m-wide corridor with walls
+    on both sides. Tests wall-following, sustained straight-line driving
+    with proximity to obstacles, and inflation radius tuning in tight spaces.
+    Unlike l1_straight which is open field, this scenario penalizes any drift
+    toward walls.
+  seed: 20
+  metadata:
+    category: benchmark
+    tier: l2_constrained
+    difficulty: medium
+    tags: [benchmark, l2, corridor, wall-following]
+
+  localization_map: maps/corridor.yaml
+
+  robot:
+    spawn_pose: [-4.5, 0.0, 0.0]
+    sensor_profile: default
+
+  goal:
+    x: 4.5
+    y: 0.0
+    tolerance: 0.3
+    timeout: 45.0
+
+  furniture: []
+  humans: []
+  events: []

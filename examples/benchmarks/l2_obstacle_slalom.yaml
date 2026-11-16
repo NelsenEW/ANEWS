@@ -1,0 +1,44 @@
+scenario:
+  name: l2_obstacle_slalom
+  description: >
+    L2 Constrained: Robot weaves between three staggered chairs placed
+    along its path. Tests reactive obstacle avoidance and path replanning.
+    obstacle layer inflation.
+  seed: 11
+  metadata:
+    category: benchmark
+    tier: l2_constrained
+    difficulty: medium
+    tags: [benchmark, l2, slalom, obstacle-avoidance]
+
+  localization_map: maps/restaurant.yaml
+
+  robot:
+    spawn_pose: [0.0, 0.0, 0.0]
+    sensor_profile: default
+
+  goal:
+    x: 5.5
+    y: 0.0
+    tolerance: 0.3
+    timeout: 45.0
+
+  furniture:
+    - type: chair
+      pose: [1.5, 0.5, 0.0]
+      label: "C1-left"
+      width: 0.513
+      height: 0.579
+    - type: chair
+      pose: [3.0, -0.5, 0.0]
+      label: "C2-right"
+      width: 0.513
+      height: 0.579
+    - type: chair
+      pose: [4.5, 0.5, 0.0]
+      label: "C3-left"
+      width: 0.513
+      height: 0.579
+
+  humans: []
+  events: []

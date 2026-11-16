@@ -1,0 +1,27 @@
+scenario:
+  name: l1_straight
+  description: >
+    L1 Primitive: Robot drives 4.5m in a straight line with no obstacles.
+    Tests path tracking accuracy, velocity control, and goal convergence.
+  seed: 1
+  metadata:
+    category: benchmark
+    tier: l1_primitive
+    difficulty: easy
+    tags: [benchmark, l1, straight-line]
+
+  localization_map: maps/restaurant.yaml
+
+  robot:
+    spawn_pose: [0.0, 0.0, 0.0]
+    sensor_profile: default
+
+  goal:
+    x: 5.0
+    y: 0.0
+    tolerance: 0.3
+    timeout: 20.0
+
+  furniture: []
+  humans: []
+  events: []

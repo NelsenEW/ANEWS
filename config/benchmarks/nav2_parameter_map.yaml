@@ -1,0 +1,111 @@
+
+parameter_classes:
+  constant:
+    description: >
+      Physical robot properties that are fixed by hardware.
+      These live in the robot config, not Nav2 params.
+    parameters:
+      - key: robot.collision_radius
+        file: config/robot.yaml
+        current: 0.25
+        notes: Fixed simulation footprint
+
+      - key: robot.footprint
+        file: config/robot.yaml
+        current: "polygon"
+        notes: 8-point polygon, never change unless hardware changes
+
+  hard:
+    description: >
+      Environment-dependent parameters. Tune once per map type
+      (open floor vs. cluttered restaurant). Run L2 benchmarks
+      to validate. Lock after validation.
+    parameters:
+      - key: inflation_layer.inflation_radius
+        file: config/nav2/global_costmap.yaml
+        current: 0.45
+        benchmark_tier: l2_constrained
+        notes: >
+          Must be > robot_radius (0.25m) but small enough for narrow passages.
+          Global=0.45, Local=0.45. Previous: 1.0/1.2 blocked 0.8m gaps entirely.
+
+      - key: inflation_layer.cost_scaling_factor
+        file: config/nav2/global_costmap.yaml
+        current: 3.0
+        benchmark_tier: l2_constrained
+        notes: >
+          Controls how fast cost decays from obstacles. Higher = faster decay,
+          robot cuts closer. Global=3.0, Local=4.0. Tuned for 0.8m gap passage.
+
+      - key: obstacle_layer.obstacle_max_range
+        file: config/nav2/local_costmap.yaml
+        current: 3.0
+        notes: How far to project scan data into costmap.
+
+  soft:
+    description: >
+      Controller behavior parameters. Iteratively refined using
+      L1 benchmarks (velocity/rotation), then validated with L2/L3.
+      Use `benchmark sweep` to find optimal values.
+    parameters:
+      - key: FollowPath.vx_max
+        file: config/nav2/controller.yaml
+        current: 0.6
+        benchmark_tier: l1_primitive
+        sweep_range: "0.3:0.8:0.1"
+        notes: Maximum forward velocity. Higher = faster but less precise.
+
+      - key: FollowPath.vx_min
+        file: config/nav2/controller.yaml
+        current: -0.2
+        notes: Reverse velocity limit. More negative = faster backup.
+
+      - key: FollowPath.wz_max
+        file: config/nav2/controller.yaml
+        current: 0.8
+        benchmark_tier: l1_primitive
+        sweep_range: "0.4:1.2:0.2"
+        notes: Maximum angular velocity. Higher = faster turns.
+
+      - key: FollowPath.ax_max
+        file: config/nav2/controller.yaml
+        current: 0.22
+        notes: Forward acceleration limit. Higher = snappier response.
+
+      - key: FollowPath.az_max
+        file: config/nav2/controller.yaml
+        current: 0.6
+        notes: Angular acceleration limit.
+
+      - key: FollowPath.batch_size
+        file: config/nav2/controller.yaml
+        current: 1000
+        benchmark_tier: l2_constrained
+        sweep_range: "500:2000:500"
+        notes: MPPI trajectory samples. More = better path quality, slower.
+
+      - key: FollowPath.time_steps
+        file: config/nav2/controller.yaml
+        current: 56
+        notes: MPPI lookahead steps. More = plans further ahead.
+
+      - key: GoalCritic.cost_weight
+        file: config/nav2/controller.yaml
+        current: 8.0
+        benchmark_tier: l1_primitive
+        sweep_range: "4.0:16.0:2.0"
+        notes: How strongly MPPI is attracted to goal. Higher = more direct.
+
+      - key: CostCritic.cost_weight
+        file: config/nav2/controller.yaml
+        current: 8.0
+        benchmark_tier: l2_constrained
+        sweep_range: "4.0:16.0:2.0"
+        notes: How strongly MPPI avoids costmap costs. Higher = more cautious.
+
+      - key: PreferForwardCritic.cost_weight
+        file: config/nav2/controller.yaml
+        current: 2.0
+        benchmark_tier: l1_primitive
+        notes: Bias toward forward motion. Higher = less reversing.
+

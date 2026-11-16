@@ -1,0 +1,27 @@
+scenario:
+  name: l1_point_turn
+  description: >
+    L1 Primitive: Robot performs a 180-degree turn then drives 2.5m to goal.
+    Tests rotation control, heading convergence, and transition from rotation
+  seed: 2
+  metadata:
+    category: benchmark
+    tier: l1_primitive
+    difficulty: easy
+    tags: [benchmark, l1, rotation, point-turn]
+
+  localization_map: maps/restaurant.yaml
+
+  robot:
+    spawn_pose: [4.0, 0.0, 0.0]
+    sensor_profile: default
+
+  goal:
+    x: 0.0
+    y: 0.0
+    tolerance: 0.3
+    timeout: 25.0
+
+  furniture: []
+  humans: []
+  events: []
